@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "fluent api for validator.js",
   "main": "index.js",
+  "public": "true",
   "scripts": {
-    "test": "mocha"
+    "test": "node_modules/.bin/mocha --recursive ./test/**/*.test.js --reporter spec"
   },
   "repository": {
     "type": "git",

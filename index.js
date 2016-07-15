@@ -1,2 +1,2 @@
 'use strict';
-const Validator = require('./lib/validator');
+module.exports = require('./lib/validator');
