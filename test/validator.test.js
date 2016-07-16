@@ -4,17 +4,12 @@ const Validator = require('./../lib/validator');
 
 describe('Validator', () => {
     describe('validate', () => {
-        it('should create new ValidationItem', () => {
-            const req = { body: { value: 'abc' }};
+        it('test', () => {
+            const req = { params: { email: 'xxx@gmail.com' }};
             const v = new Validator();
-            v.validate(req.body, 'value', 'value should be abc').hasValue();
+            v.check(Validator.validations.isEmail, Validator.validations.exist)(req.params, 'email', 'param email is required');
             expect(v.hasErrors()).toEqual(false);
-        });
-        it('should create error entry if not match', () => {
-            const req = { body: { value: 'abc' }};
-            const v = new Validator();
-            v.validate(req.body, 'value', 'value should be an url').hasValue().isUrl();
-            expect(v.hasErrors()).toEqual(true);
+            expect(v.errors).toEqual([]);
         });
     });
 });
