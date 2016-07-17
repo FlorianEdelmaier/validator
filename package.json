@@ -4,6 +4,9 @@
   "description": "fluent api for validator.js",
   "main": "index.js",
   "public": "true",
+  "engines": {
+    "node": ">= 4.4.0"
+  },
   "scripts": {
     "test": "node_modules/.bin/mocha --recursive ./test/**/*.test.js --reporter spec"
   },
