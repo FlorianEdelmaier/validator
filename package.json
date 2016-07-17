@@ -1,5 +1,5 @@
 {
-  "name": "fluent-validator",
+  "name": "combine-validators",
   "version": "1.0.0",
   "description": "fluent api for validator.js",
   "main": "index.js",
@@ -15,19 +15,19 @@
     "url": "git+https://github.com/FlorianEdelmaier/validator.git"
   },
   "keywords": [
-    "validator"
+    "validator", "combine", "context"
   ],
-  "author": "florian.edelmaier@gmail.com",
+  "author": "Florian Edelmaier <florian.edelmaier@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/FlorianEdelmaier/validator/issues"
   },
   "homepage": "https://github.com/FlorianEdelmaier/validator#readme",
   "dependencies": {
-    "validator": "^5.4.0"
+    "validator": "5.4.0"
   },
   "devDependencies": {
-    "expect": "^1.20.2",
-    "mocha": "^2.5.3"
+    "expect": "1.20.2",
+    "mocha": "2.5.3"
   }
 }
