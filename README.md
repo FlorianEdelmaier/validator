@@ -1,7 +1,7 @@
 # fluent-validator
 
 ```javascript
-const Validator = require('fluent-validator');
+const Validator = require('combine-validators');
 const validations = Validator.validations;
 
 const v = new Validator();

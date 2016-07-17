@@ -1,6 +1,6 @@
 {
   "name": "combine-validators",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "fluent api for validator.js",
   "main": "index.js",
   "public": "true",
