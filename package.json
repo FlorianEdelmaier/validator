@@ -1,21 +1,24 @@
 {
   "name": "combine-validators",
-  "version": "1.0.1",
   "description": "fluent api for validator.js",
   "main": "index.js",
+  "version": "0.0.0-semantically-released",
   "public": "true",
   "engines": {
     "node": ">= 4.4.0"
   },
   "scripts": {
-    "test": "node_modules/.bin/mocha --recursive ./test/**/*.test.js --reporter spec"
+    "test": "node_modules/.bin/mocha --recursive ./test/**/*.test.js --reporter spec",
+    "semantic-release": "node_modules/.bin/semantic-release pre && npm publish && node_modules/.bin/semantic-release post"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/FlorianEdelmaier/validator.git"
+    "url": "https://github.com/FlorianEdelmaier/validator.git"
   },
   "keywords": [
-    "validator", "combine", "context"
+    "validator",
+    "combine",
+    "context"
   ],
   "author": "Florian Edelmaier <florian.edelmaier@gmail.com>",
   "license": "MIT",
@@ -28,6 +31,7 @@
   },
   "devDependencies": {
     "expect": "1.20.2",
-    "mocha": "2.5.3"
+    "mocha": "2.5.3",
+    "semantic-release": "4.3.5"
   }
 }

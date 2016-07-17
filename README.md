@@ -1,4 +1,4 @@
-# fluent-validator
+# combine-validators
 
 ```javascript
 const Validator = require('combine-validators');
