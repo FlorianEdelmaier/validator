@@ -10,6 +10,7 @@
   "scripts": {
     "test": "mocha --recursive ./test/*.test.js --reporter spec",
     "test:coverage": "node_modules/.bin/istanbul cover node_modules/mocha/bin/_mocha -- test/**/*.test.js -R spec",
+    "check:coverage": "node_modules/.bin/istanbul check-coverage --statements 100 --branches 100 --functions 100 --lines 100",
     "report:coverage": "cat ./coverage/lcov.info | ./node_modules/.bin/codecov",
     "semantic-release": "node_modules/.bin/semantic-release pre && npm publish && node_modules/.bin/semantic-release post"
   },
@@ -41,7 +42,7 @@
   },
   "config": {
     "ghooks": {
-      "pre-commit": "npm run test"
+      "pre-commit": "npm run test && npm run check:coverage"
     }
   }
 }
