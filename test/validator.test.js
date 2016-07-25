@@ -8,7 +8,7 @@ describe('Validator', () => {
         it('should throw exception if given object does not exist', () => {
             const req = { };
             const v = new Validator();
-            const check = v.check(validations.exists);
+            const check = v.check(validations.isMandatory);
             let error;
             try {
                 check(req.params, 'test', 'test');
@@ -19,14 +19,14 @@ describe('Validator', () => {
         it('should generate no validation errors when input valid', () => {
             const req = { body: { email: 'xxx@gmail.com' } };
             const v = new Validator();
-            v.check(validations.exists, validations.isEmail)(req.body, 'email', 'email is required');
+            v.check(validations.isMandatory, validations.isEmail)(req.body, 'email', 'email is required');
             expect(v.hasErrors()).toEqual(false);
             expect(v.errors).toEqual([]);
         });
         it('should generate validations errors when validators rejected', () => {
             const req = { body: { email: 'abc_gmail.com' } };
             const v = new Validator();
-            v.check(validations.exists, validations.isEmail)(req.body, 'email', 'email is required');
+            v.check(validations.isMandatory, validations.isEmail)(req.body, 'email', 'email is required');
             expect(v.hasErrors()).toEqual(true);
             expect(v.errors.length).toEqual(1);
             expect(v.errors[0].message).toEqual('email is required');
@@ -35,14 +35,36 @@ describe('Validator', () => {
         it('should omit validators which are not a functions', () => {
             const test = { test: 'abc' };
             const v = new Validator();
-            v.check(validations.exists, {})(test, 'test', 'test is required');
+            v.check(validations.isMandatory, {})(test, 'test', 'test is required');
             expect(v.hasErrors()).toEqual(false);
         });
         it('should omit validators which are not provided by package', () => {
             const test = { test: 'abc' };
             const v = new Validator();
-            v.check(validations.exists, str => str === 'xyz')(test, 'test', 'test is required');
+            v.check(validations.isMandatory, str => str === 'xyz')(test, 'test', 'test is required');
             expect(v.hasErrors()).toEqual(false);
+        });
+        it('should throw exception if marked as mandatory and does not exist', () => {
+            const req = { params: {} };
+            const v = new Validator();
+            let error;
+            try {
+                v.check(validations.isMandatory)(req.params, 'test', 'test');
+            } catch(err) { error = err; }
+            expect(error).toEqual(new Error('Given object is not defined'));
+        });
+        it('should omit validators if check is marked as optional', () => {
+            const req = { params: {} };
+            const v = new Validator();
+            v.check(validations.isOptional, validations.isEmail)(req.params, 'test', 'test');
+            expect(v.hasErrors()).toEqual(false);
+        });
+        it('should evaluate validations if check is marked as optional and property exists', () => {
+            const req = { params: { email: 'abc' } };
+            const v = new Validator();
+            v.check(validations.isOptional, validations.isEmail)(req.params, 'email', 'email should be valid');
+            expect(v.hasErrors()).toEqual(true);
+            expect(v.errors[0].message).toEqual('email should be valid');
         });
     });
 });

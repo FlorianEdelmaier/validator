@@ -3,25 +3,35 @@ const expect = require('expect');
 const validations = require('./../lib/validations');
 
 describe('validators', () => {
-    describe('exists', () => {
+    describe('isMandatory', () => {
         it('should return false if input null', () => {
-            expect(validations.exists(null)).toEqual(false);
+            expect(validations.isMandatory(null)).toEqual(false);
         });
         it('should return false if input undefined', () => {
-            expect(validations.exists(undefined)).toEqual(false);
+            expect(validations.isMandatory(undefined)).toEqual(false);
         });
         it('should return false if input is empty string', () => {
-            expect(validations.exists('')).toEqual(false);
+            expect(validations.isMandatory('')).toEqual(false);
         });
         it('should return true if input is null string', () => {
-            expect(validations.exists('null')).toEqual(true);
+            expect(validations.isMandatory('null')).toEqual(true);
         });
         it('should return false if property does not exist', () => {
             const test = { };
-            expect(validations.exists(test.test)).toEqual(false);
+            expect(validations.isMandatory(test.test)).toEqual(false);
         });
         it('should return true if string is given', () => {
-            expect(validations.exists('abc')).toEqual(true);
+            expect(validations.isMandatory('abc')).toEqual(true);
+        });
+    });
+    describe('isOptional', () => {
+        it('should be a function with name "isOptional"', () => {
+            expect(validations.isOptional).toBeA('function');
+            expect(validations.isOptional.name).toEqual('isOptional');
+        });
+        it('should return nothing', () => {
+            const result = validations.isOptional();
+            expect(result).toEqual(null);
         });
     });
     describe('isIn', () => {

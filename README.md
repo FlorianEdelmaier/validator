@@ -13,8 +13,8 @@ const Validator = require('combine-validators');
 const validations = Validator.validations;
 
 const v = new Validator();
-v.check(validations.exists, validations.isEmail)(req.body, 'email', 'Email not valid');
-v.check(validations.exists, validations.isIn('a', 'b', 'c'))(req.body, 'type', 'Type not valid');
-v.check(validations.exists, validations.isMongoId)(req.body, '_id', 'Id not valid');
+v.check(validations.isMandatory, validations.isEmail)(req.body, 'email', 'Email not valid');
+v.check(validations.isOptional, validations.isIn('a', 'b', 'c'))(req.body, 'type', 'Type not valid');
+v.check(validations.isMandatory, validations.isMongoId)(req.body, '_id', 'Id not valid');
 if(v.hasErrors()) console.log('Validation rejected');
 ```
