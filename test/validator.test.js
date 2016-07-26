@@ -32,18 +32,18 @@ describe('Validator', () => {
             expect(v.errors[0].message).toEqual('email is required');
             expect(v.errors[0].value).toEqual('email');
         });
-        it('should omit validators which are not a functions', () => {
+        it('should omit validators which are not functions', () => {
             const test = { test: 'abc' };
             const v = new Validator();
             v.check(validations.isMandatory, {})(test, 'test', 'test is required');
             expect(v.hasErrors()).toEqual(false);
         });
-        it('should omit validators which are not provided by package', () => {
-            const test = { test: 'abc' };
-            const v = new Validator();
-            v.check(validations.isMandatory, str => str === 'xyz')(test, 'test', 'test is required');
-            expect(v.hasErrors()).toEqual(false);
-        });
+        // it('should omit validators which are not provided by package', () => {
+        //     const test = { test: 'abc' };
+        //     const v = new Validator();
+        //     v.check(validations.isMandatory, str => str === 'xyz')(test, 'test', 'test is required');
+        //     expect(v.hasErrors()).toEqual(false);
+        // });
         it('should throw exception if marked as mandatory and does not exist', () => {
             const req = { params: {} };
             const v = new Validator();
@@ -65,6 +65,19 @@ describe('Validator', () => {
             v.check(validations.isOptional, validations.isEmail)(req.params, 'email', 'email should be valid');
             expect(v.hasErrors()).toEqual(true);
             expect(v.errors[0].message).toEqual('email should be valid');
+        });
+        it('should create no error if isIn validation is fullfilled', () => {
+            const req = { body: { type: 'a' } };
+            const v = new Validator();
+            v.check(validations.isIn(['a', 'b']))(req.body, 'type', 'type is not valid');
+            expect(v.hasErrors()).toEqual(false);
+            expect(v.errors.length).toEqual(0);
+        });
+        it('should create error if isIn validation is rejected', () => {
+            const req = { body: { type: 'z' } };
+            const v = new Validator();
+            v.check(validations.isIn(['a', 'b']))(req.body, 'type', 'type is not valid');
+            expect(v.hasErrors()).toEqual(true);
         });
     });
 });
