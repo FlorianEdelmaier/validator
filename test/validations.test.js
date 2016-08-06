@@ -48,4 +48,18 @@ describe('validators', () => {
             expect(isIn('z')).toEqual(false);
         });
     });
+    describe('isLength', () => {
+        it('should be implemented as currying function', () => {
+            const isLength = validations.isLength(0,1);
+            expect(isLength).toBeA('function');
+        });
+        it('should return true if string length is in given range', () => {
+            const isLength = validations.isLength(3,3);
+            expect(isLength('abc')).toEqual(true);
+        });
+        it('should return false if string length is out of range', () => {
+            const isLength = validations.isLength(2,4);
+            expect(isLength('abcdef')).toEqual(false);
+        });
+    });
 })
